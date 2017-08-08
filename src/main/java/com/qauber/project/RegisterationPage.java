@@ -24,6 +24,15 @@ public class RegisterationPage {
         return driver.findElement(By.xpath("//*[@id='pass1']"));
     }
 
+    public WebElement RepeatPassword() {
+        return driver.findElement(By.xpath("//*[@id='pass2']"));
+    }
+
+    public WebElement ProjectOwner() {
+        return driver.findElement(By.xpath("//input[@value='business_owner']"));
+    }
+
+
     public WebElement Robot() {
         return driver.findElement(By.xpath("//*[@id='recaptcha-anchor']"));
     }

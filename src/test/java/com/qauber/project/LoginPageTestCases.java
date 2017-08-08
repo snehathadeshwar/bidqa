@@ -16,7 +16,7 @@ public class LoginPageTestCases {
         WebDriver driver = new ChromeDriver();
         //HomePage homePage = new HomePage(driver);
         RegisterationPage registerationpage = new RegisterationPage(driver);
-        driver.get("http://www.test.bidqa.com");
+        driver.get("http://test.bidqa.com");
         driver.findElement(By.xpath("//*[@id='cssmenu']/ul/li[8]/a")).click();
                 registerationpage.Username().sendKeys("s");
                 registerationpage.Email().sendKeys("emmyhuddy-7452@yopmail.com");

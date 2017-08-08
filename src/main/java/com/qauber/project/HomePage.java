@@ -19,6 +19,9 @@ public class HomePage {
     public WebElement Registeration() {
         return driver.findElement(By.xpath("//a[@href='http://test.bidqa.com/wp-login.php?action=register']"));
     }
+    public WebElement LogIn() {
+        return driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[8]/a"));
+    }
 
     public WebElement QAContractorsProfile() {
         return driver.findElement(By.linkText("QA Contractors profiles"));
