@@ -11,7 +11,7 @@ public class RegisterationPage {
     public RegisterationPage(WebDriver driver) {
         this.driver = driver;
     }
-
+    // This is for Username
     public WebElement Username() {
         return driver.findElement(By.xpath("//*[@id='user_login']"));
     }
