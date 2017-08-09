@@ -1,6 +1,7 @@
 package com.qauber.project;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -38,6 +39,8 @@ public class RegisterationPage {
     }
 
     public WebElement RegisterButton() {
+        //((JavascriptExecutor) driver).executeScript(("arguments[0].scrollIntoView();"),driver.findElement(By.xpath("//*[@id='submits']")
+        //));
         return driver.findElement(By.xpath("//*[@id='submits']"));
     }
 

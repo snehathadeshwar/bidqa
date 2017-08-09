@@ -17,9 +17,7 @@ import java.util.List;
 public class RegsiterationPageTestCases {
 
     WebDriver driver = new ChromeDriver();
-
-    RegisterationPage registerationPage = new RegisterationPage(driver);
-    HomePage homePage = new HomePage(driver);
+    PageResources page = new PageResources(driver);
 
     @BeforeTest
 
@@ -27,17 +25,18 @@ public class RegsiterationPageTestCases {
 
         driver.get("http://test.bidqa.com");
         Thread.sleep(3000);
-        homePage.Registeration().click();
+        page.HomePage().Registeration().click();
 
 
     }
 
+    //user cannnot enter Username more than 20 characters
     @Test
 
     public void test1() {
 
 
-        registerationPage.Username().sendKeys("abcdefghijklmnopqrstu");
+        page.RegisterationPage().Username().sendKeys("abcdefghijklmnopqrstu");
         //String message = driver.findElement(By.xpath(".//*[@id='error_username']")).getText();
         //System.out.println(message);
 
@@ -49,18 +48,20 @@ public class RegsiterationPageTestCases {
 
     }
 
+    //User cannot register without checking "I'm robot"
     @Test
 
-    public void test2() {
+    public void test2() throws Exception {
 
 
-        registerationPage.Username().sendKeys("abcdefgh");
+        page.RegisterationPage().Username().sendKeys("abcdefgh");
         //String message = driver.findElement(By.xpath(".//*[@id='error_username']")).getText();
         //System.out.println(message);
-        registerationPage.Email().sendKeys("sneha1234@gmail.com");
-        registerationPage.Password().sendKeys("1234");
-        registerationPage.RepeatPassword().sendKeys("1234");
-        registerationPage.RegisterButton().click();
+        page.RegisterationPage().Email().sendKeys("sneha1234@gmail.com");
+        page.RegisterationPage().Password().sendKeys("1234");
+        page.RegisterationPage().RepeatPassword().sendKeys("1234");
+        Thread.sleep(3000);
+        page.RegisterationPage().RegisterButton().click();
 
         WebElement element = driver.findElement(By.xpath("//*[@id='main']/div/div/div/div/div[1]/ul/li"));
         String message = element.getText();
@@ -69,23 +70,24 @@ public class RegsiterationPageTestCases {
 
     }
 
+    //cannot register when passwords dont match
     @Test
 
     public void test3() throws Exception {
 
 
-        registerationPage.Username().sendKeys("abcdefgh");
+        page.RegisterationPage().Username().sendKeys("abcdefgh");
 
         //String message = driver.findElement(By.xpath(".//*[@id='error_username']")).getText();
         //System.out.println(message);
-        registerationPage.Email().sendKeys("sneha1234@gmail.com");
+        page.RegisterationPage().Email().sendKeys("sneha1234@gmail.com");
         Thread.sleep(3000);
-        registerationPage.Password().sendKeys("123");
-        registerationPage.RepeatPassword().sendKeys("1234");
+        page.RegisterationPage().Password().sendKeys("123");
+        page.RegisterationPage().RepeatPassword().sendKeys("1234");
 
-        registerationPage.ProjectOwner().click();
+        page.RegisterationPage().ProjectOwner().click();
 
-        registerationPage.RegisterButton().click();
+        page.RegisterationPage().RegisterButton().click();
 
         WebElement element = driver.findElement(By.xpath(".//*[@id='main']/div/div/div/div/div[1]/ul/li[1]"));
         String message = element.getText();
@@ -93,15 +95,16 @@ public class RegsiterationPageTestCases {
         Assert.assertEquals("ERROR: please use a passwords don't match.", message);
 
     }
-        @AfterTest
-        public void tearup() {
 
-             driver.quit();
+    @AfterTest
+
+    public void tearup() {
+
+        driver.quit();
 
 
-        }
     }
-
+}
 
 
 

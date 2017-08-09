@@ -14,8 +14,7 @@ public class Proposals {
         this.driver = driver;
     }
 
-    public WebElement MyAccount() { return driver.findElement(By.xpath("//*[@id='cssmenu']/ul/li[6]/a "));
-    }
+
 
 
     public WebElement Project() {

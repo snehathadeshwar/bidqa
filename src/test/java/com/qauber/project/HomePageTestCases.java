@@ -7,21 +7,26 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
 public class HomePageTestCases {
+    WebDriver driver = new ChromeDriver();
+    PageResources page = new PageResources(driver);
 
+     //   Login in link clicked
     @Test
-    public void testHomePage() throws Exception{
-        WebDriver driver = new ChromeDriver();
-        HomePage homePage = new HomePage(driver);
+    public void testHomePage() throws Exception {
+
 
         driver.get("http://test.bidqa.com");
         driver.manage().window().maximize();
         Thread.sleep(3000);
         System.out.println("Loading site");
 
-        driver.findElement(By.xpath("//*[@id='cssmenu']/ul/li[8]/a")).click();
+        page.HomePage().LogIn().click();
         System.out.println("Login link clicked");
 
+    }
+    @Test
 
+    public void test2() throws Exception {
 
         //Thread.sleep(3000);
 

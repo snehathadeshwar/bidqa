@@ -12,21 +12,23 @@ import org.testng.annotations.Test;
 
 public class SubscriptionTestCases {
     WebDriver driver = new ChromeDriver();
+    PageResources page = new PageResources(driver);
 
-    HomePage homePage = new HomePage(driver);
-    RegisterationPage registerationPage = new RegisterationPage(driver);
-    QA qa = new QA(driver);
-    Subscription subscription = new Subscription(driver);
+
+    //HomePage homePage = new HomePage(driver);
+    //RegisterationPage registerationPage = new RegisterationPage(driver);
+    //QA qa = new QA(driver);
+    //Subscription subscription = new Subscription(driver);
 
     @BeforeTest
     public void setup() throws Exception {
 
 
         driver.get("http://test.bidqa.com");
-        homePage.LogIn().click();
-        qa.Username().sendKeys("s");
-        qa.Password().sendKeys("c55b38f");
-        qa.SignIn().click();
+        page.HomePage().LogIn().click();
+        page.QA().Username().sendKeys("s");
+        page.QA().Password().sendKeys("c55b38f");
+        page.QA().SignIn().click();
 
         // /driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[8]/a")).click();
         WebElement element = driver.findElement(By.xpath("//*[@id='header']/div/div/div[4]"));
@@ -34,9 +36,9 @@ public class SubscriptionTestCases {
         System.out.println(strng);
         Assert.assertEquals("Welcome s", strng);
     }
-
-        @Test
-        public void test1() throws Exception {
+            //
+            @Test
+             public void test1() throws Exception {
             WebElement MyAccount = driver.findElement(By.xpath("//*[@id='cssmenu']/ul/li[6]/a"));
 
             Actions action = new Actions(driver);
@@ -62,9 +64,24 @@ public class SubscriptionTestCases {
 
             public void test2 () throws Exception{
 
+                WebElement MyAccount = page.MyAccount().MyAccount();
+                //indElement(By.xpath("//*[@id='cssmenu']/ul/li[6]/a"));
 
-            subscription.Mysubscription().click();
-            driver.findElement(By.xpath("//*[@id='782']")).click();
+                Actions action = new Actions(driver);
+
+                action.moveToElement(MyAccount).build().perform();
+
+                //page.Subscription();
+
+                //driver.findElement(By.xpath("//*[@id='cssmenu']/ul/li[6]/ul/li[1]/a")).click();
+
+               // driver.findElement(By.xpath("//*[@id='subscribe-form']/button")).click();
+                Thread.sleep(5000);
+
+
+            page.Subscription().accountMysubscription().click();
+            page.Subscription().Mysubscription().click();
+            driver.findElement(By.xpath("//*[@id='783']")).click();
                 Thread.sleep(3000);
                 boolean Message = driver.getPageSource().contains("Successfully! Subscription deleted");
                 if (Message == true) {
@@ -74,9 +91,7 @@ public class SubscriptionTestCases {
                 }
 
 
-
             }
-
 
 
             @AfterTest
