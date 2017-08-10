@@ -1,6 +1,7 @@
 package com.qauber.project;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,33 +11,34 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class SubscriptionTestCases {
     WebDriver driver = new ChromeDriver();
     PageResources page = new PageResources(driver);
 
-
-    //HomePage homePage = new HomePage(driver);
-    //RegisterationPage registerationPage = new RegisterationPage(driver);
-    //QA qa = new QA(driver);
-    //Subscription subscription = new Subscription(driver);
 
     @BeforeTest
     public void setup() throws Exception {
 
 
         driver.get("http://test.bidqa.com");
+        Dimension d = new Dimension(1400,900);
+        driver.manage().window().setSize(d);
+
         page.HomePage().LogIn().click();
         page.QA().Username().sendKeys("s");
         page.QA().Password().sendKeys("c55b38f");
         page.QA().SignIn().click();
+        WebElement element = page.LoginPage().welcomeMessage();
 
-        // /driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[8]/a")).click();
-        WebElement element = driver.findElement(By.xpath("//*[@id='header']/div/div/div[4]"));
         String strng = element.getText();
         System.out.println(strng);
         Assert.assertEquals("Welcome s", strng);
     }
-            //
+
+
+            //Cannot subscribe when all fields are empty -gets error
             @Test
              public void test1() throws Exception {
             WebElement MyAccount = driver.findElement(By.xpath("//*[@id='cssmenu']/ul/li[6]/a"));
@@ -45,13 +47,12 @@ public class SubscriptionTestCases {
 
             action.moveToElement(MyAccount).build().perform();
 
-            driver.findElement(By.xpath("//*[@id='cssmenu']/ul/li[6]/ul/li[1]/a")).click();
+            page.Subscription().accountMysubscription().click();
 
-            driver.findElement(By.xpath("//*[@id='subscribe-form']/button")).click();
+            page.Subscription().subscribeButton().click();
             Thread.sleep(5000);
+
             //Verify error message
-
-
             boolean Error = driver.getPageSource().contains("Sorry, but all field is empty");
             if (Error == true) {
                 System.out.print("Message Present ");
@@ -60,46 +61,51 @@ public class SubscriptionTestCases {
             }
 
         }
+
+        //
             @Test
 
             public void test2 () throws Exception{
 
                 WebElement MyAccount = page.MyAccount().MyAccount();
-                //indElement(By.xpath("//*[@id='cssmenu']/ul/li[6]/a"));
 
                 Actions action = new Actions(driver);
-
+                action.moveToElement(MyAccount).build().perform();
+                Thread.sleep(5000);
                 action.moveToElement(MyAccount).build().perform();
 
-                //page.Subscription();
+                page.Subscription().accountMysubscription().click();
 
-                //driver.findElement(By.xpath("//*[@id='cssmenu']/ul/li[6]/ul/li[1]/a")).click();
+                WebElement Webtable= page.Subscription().subscriptionTable();
 
-               // driver.findElement(By.xpath("//*[@id='subscribe-form']/button")).click();
-                Thread.sleep(5000);
+                        //driver.findElement(By.id("my_subscribtions"));
+                List<WebElement> TotalRowCount= Webtable.findElements(By.xpath("//*[@id='my_subscribtions']/tbody/tr"));
+
+                System.out.println("No. of Rows in the WebTable: "+TotalRowCount.size());
+
+                page.Subscription().deleteButton().click();
 
 
-            page.Subscription().accountMysubscription().click();
-            page.Subscription().Mysubscription().click();
-            driver.findElement(By.xpath("//*[@id='783']")).click();
                 Thread.sleep(3000);
                 boolean Message = driver.getPageSource().contains("Successfully! Subscription deleted");
                 if (Message == true) {
                     System.out.print("Subscription deleted ");
                 } else {
                     System.out.print("Subscription not deleted");
+
                 }
 
+    }
 
-            }
+}
 
 
-            @AfterTest
-            public void tearup () {
 
-                driver.quit();
-            }
-        }
+
+
+
+
+
 
 
 

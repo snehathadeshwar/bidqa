@@ -1,8 +1,10 @@
 package com.qauber.project;
 
+import com.sun.java.util.jar.pack.DriverResource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.AfterTest;
 
 public class Subscription {
 
@@ -14,6 +16,7 @@ public class Subscription {
 
     public WebElement accountMysubscription() {
         return driver.findElement(By.xpath("//*[@id='cssmenu']/ul/li[6]/ul/li[1]/a"));
+
     }
 
     public WebElement Mysubscription() {
@@ -25,12 +28,24 @@ public class Subscription {
         return driver.findElement(By.xpath("//*[@id='subscribe-form']/button"));
     }
 
-    //public WebElement Email() {
-    // return driver.findElement(By.xpath("//*[@id='login_password']"));
+    public WebElement subscriptionTable() {
+        return driver.findElement(By.id("my_subscribtions"));
+    }
 
+    public WebElement tableRow() {
+        return driver.findElement(By.xpath("//*[@id='my_subscribtions']/tbody/tr"));
+    }
 
-    //public WebElement deleteButton() {
-       // return driver.findElement(By.xpath("//*[@id='774']"));
+    public WebElement deleteButton() {
+        return driver.findElement(By.xpath("//*[@id='my_subscribtions']/tbody/tr[1]/td[6]"));
+    }
+
+    @AfterTest
+    public void tearup () {
+
+        driver.quit();
+    }
+
     }
 
 

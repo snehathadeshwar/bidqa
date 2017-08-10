@@ -28,4 +28,10 @@ public class LoginPage {
     public WebElement LostYourPassword() {
         return driver.findElement(By.xpath("//*[@id='logins']/li[3]/a"));
     }
+
+    public WebElement welcomeMessage() {
+        return driver.findElement(By.xpath("//*[@id='header']/div/div/div[4]"));
+    }
+
+
 }

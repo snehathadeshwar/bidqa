@@ -70,7 +70,7 @@ public class ActiveProjectsTestCases {
 
         if (actualTitle.equals("BidQA | App testing ")) {
             System.out.println("Verification Successful - The correct Title is opened.");
-        } else {
+           } else {
             System.out.println("Verification Failed - An Title Url is opened.");
             //In case of Fail, you like to print the actual and expected URL for the record purpose
             System.out.println("Actual URL is : " + actualTitle);

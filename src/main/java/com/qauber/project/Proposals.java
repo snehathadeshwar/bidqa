@@ -16,11 +16,11 @@ public class Proposals {
 
 
 
-
     public WebElement Project() {
-        //((JavascriptExecutor) driver).executeScript(("arguments[0].scrollIntoView();"), driver.findElement(By.xpath("//*" +
-               // "[@id='post-6097']/div/div[1]/a")));
-        return driver.findElement(By.xpath("//*[@id='post-6097']/div/div[1]/a"));
+
+        return driver.findElement(By.xpath("//div[@id='content']/div[@class='post']/div[@class='padd10']" +
+                        "/div[@class='post-title']/a"));
+
     }
 
 

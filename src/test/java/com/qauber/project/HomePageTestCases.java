@@ -1,10 +1,13 @@
 package com.qauber.project;
 
+import org.openqa.selenium.Dimension;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
+import org.openqa.selenium.Dimension;
 
 public class HomePageTestCases {
     WebDriver driver = new ChromeDriver();
@@ -16,7 +19,12 @@ public class HomePageTestCases {
 
 
         driver.get("http://test.bidqa.com");
-        driver.manage().window().maximize();
+
+
+        Dimension d = new Dimension(1400,900);
+        //Resize the current window to the given dimension
+        driver.manage().window().setSize(d);
+
         Thread.sleep(3000);
         System.out.println("Loading site");
 

@@ -19,11 +19,11 @@ public class PageResources {
         loginPage = new LoginPage(driver);
 
         registerationPage = new RegisterationPage(driver);
-
+        subscription = new Subscription(driver);
         activeProjects = new ActiveProjects(driver);
         myAccount = new MyAccount(driver);
          qa = new QA(driver);
-
+        proposals = new Proposals(driver);
 
     }
 
