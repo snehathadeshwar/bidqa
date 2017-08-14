@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 
 public class PageResources {
 
-    private HomePage homePage;
-    private LoginPage loginPage;
-    private MyAccount myAccount;
+            private HomePage homePage;
+            private LoginPage loginPage;
+            private MyAccount myAccount;
             private PageResources pageResources;
             private Proposals proposals;
             private QA qa;
@@ -14,7 +14,10 @@ public class PageResources {
             private Subscription subscription;
             private ActiveProjects activeProjects;
 
-    public PageResources(WebDriver driver) {
+            //private TestData testdata;
+
+
+        public PageResources(WebDriver driver) {
         homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
 
@@ -24,7 +27,7 @@ public class PageResources {
         myAccount = new MyAccount(driver);
          qa = new QA(driver);
         proposals = new Proposals(driver);
-
+        //testdata = new TestData(driver);
     }
 
     public HomePage HomePage() {

@@ -11,13 +11,21 @@ public class MyAccount {
         this.driver = driver;
     }
 
-    public WebElement MyAccount() { return driver.findElement(By.xpath("//*[@id='cssmenu']/ul/li[6]/a "));
+    public WebElement getMyAccount() { return driver.findElement(By.xpath("//*[@id='cssmenu']/ul/li[6]/a "));
     }
 
 
-    public WebElement Activeprojects() { return driver.findElement(By.xpath(".//*[@id='my-account-admin-menu_seller']" +
+    public WebElement getActiveprojects() { return driver.findElement(By.xpath(".//*[@id='my-account-admin-menu_seller']" +
             "/li[2]/a "));
     }
 
+    public WebElement getMyProjects() { return driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[5]/a"));
+    }
+
+    public WebElement getProjectsWon() { return driver.findElement(By.xpath("//*[@id='my-account-admin-menu_buyer']/li[1]/a"));
+    }
+
+    public WebElement getProjectsWonNum() { return driver.findElement(By.xpath("//*[@id='my-account-admin-menu_buyer']/li[1]/a/span"));
+    }
 
 }

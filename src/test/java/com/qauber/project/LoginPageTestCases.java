@@ -2,15 +2,16 @@ package com.qauber.project;
 
 
 import org.junit.Before;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import javax.swing.*;
 
 public class LoginPageTestCases {
 
@@ -18,14 +19,14 @@ public class LoginPageTestCases {
 
     PageResources page = new PageResources(driver);
 
-
-
     @BeforeTest
     public void setup() {
 
         driver.get("http://test.bidqa.com");
-        page.HomePage().LogIn().click();
+        page.HomePage().getLogIn().click();
 
+        Dimension d = new Dimension(1400,900);
+        driver.manage().window().setSize(d);
     }
 
     @Test
@@ -61,7 +62,7 @@ public class LoginPageTestCases {
         public void lostpassword() {
 
 
-            page.LoginPage().LostYourPassword().click();
+            page.LoginPage().getLostYourPassword().click();
 
             String actualUrl = driver.getCurrentUrl();
 
@@ -94,5 +95,169 @@ public class LoginPageTestCases {
                 }
 
 
+                    //TC: T127045
+                    @Test
+                   public void test4() throws Exception {
+                        page.QA().Username().sendKeys(TestData.getQAUsername());
+                        page.QA().Password().sendKeys(TestData.getQAPassword());
+                        page.QA().SignIn().click();
+
+
+                        WebElement element = page.LoginPage().getwelcomeMessage();
+                        String strng = element.getText();
+                        System.out.println(strng);
+                        Assert.assertEquals("Welcome s", strng);
+
+                        JavascriptExecutor js = (JavascriptExecutor) driver;
+                        js.executeScript("history.go(-1);", new Object[0]);
+                        js.executeScript("history.go(-1);", new Object[0]);
+
+                        Thread.sleep(3000);
+                        String actualURL = driver.getCurrentUrl();
+
+                        String expectedURL = "http://test.bidqa.com";
+
+                        if (actualURL.equals(expectedURL)) {
+
+                            System.out.println("User is logged out");
+                        } else
+
+                        {
+                            System.out.println("User is not logged out");
+
+                        }
+
+
+                        //driver.e("window.history.go(-1)");
+                        //driver.navigate().back();
+                        //Actions kpress = new Actions(driver);
+                        //kpress.keyDown(driver.findElement(By.id("name")), Keys.ALT).perform(); kpress.sendKeys(driver.findElement(By.id("name")), "T").perform();
+                        //kpress.keyUp(driver.findElement(By.id("name")),Keys.SHIFT).perform();
+
+                        //Actions action = new Actions(driver);
+                        //action.sendKeys(Keys.COMMAND+"[");
+                        //action.sendKeys(Keys.BACK_SPACE);
+                    }
+
+                        //TC:T127052
+
+                        @Test
+
+                        public void test5() {
+
+                            page.QA().Username().sendKeys(TestData.getQAUsername());
+                            page.QA().Password().sendKeys(TestData.getQAPassword());
+                            page.QA().SignIn().click();
+                            WebElement message = page.LoginPage().getwelcomeMessage();
+                            String welcomeMessage = message.getText();
+                            System.out.println(welcomeMessage);
+                            Assert.assertEquals("Welcome s", welcomeMessage);
+                        }
+    //TC: T127053
+
+    @Test
+
+    public void test6() {
+
+        page.QA().Username().sendKeys(TestData.getTestUsername());
+        page.QA().Password().sendKeys(TestData.getQAPassword());
+        page.QA().SignIn().click();
+
+        WebElement message = page.LoginPage().getUserOrPassError();
+        String ErrorMessage = message.getText();
+        System.out.println(ErrorMessage);
+        Assert.assertEquals("ERROR: Your password or username is incorrect. Lost your password?", ErrorMessage);
     }
+
+    //TC:  T127054
+
+    @Test
+
+    public void test7() {
+
+        page.QA().Username().sendKeys(TestData.getQAUsername());
+        page.QA().Password().sendKeys(TestData.getTestPassword());
+        page.QA().SignIn().click();
+
+        WebElement message = page.LoginPage().getUserOrPassError();
+        String ErrorMessage = message.getText();
+        System.out.println(ErrorMessage);
+        Assert.assertEquals("ERROR: Your password or username is incorrect. Lost your password?", ErrorMessage);
+    }
+
+//TC:  T127085
+
+    @Test
+
+    public void test8() {
+
+         String actualURL = driver.getCurrentUrl();
+
+        String expectedURL = "http://test.bidqa.com/wp-login.php";
+
+        Assert.assertEquals(actualURL, expectedURL);
+        System.out.println("Actual URL is : " + actualURL);
+        System.out.println("Expected URL is : " + expectedURL);
+    }
+
+    //TC:  T126910
+    @Test
+
+    public void test9() {
+
+        page.QA().Username().sendKeys(TestData.getQAUsername());
+        page.QA().Password().sendKeys(TestData.getQAPassword());
+        page.QA().SignIn().click();
+
+
+        WebElement element = page.LoginPage().getLoggedinMessage();
+        String strng = element.getText();
+        System.out.println(strng);
+        Assert.assertEquals("You are logged in as a QA Engineer", strng);
+
+    }
+    //TC:  T126918
+    @Test
+    public void test10() {
+
+        page.QA().Username().sendKeys(TestData.getQAUsername());
+        page.QA().SignIn().click();
+
+        WebElement element = page.LoginPage().getBlankPasswordError();
+        String blankPassword = element.getText();
+        System.out.println(blankPassword);
+        Assert.assertEquals("Error: The password field is empty.", blankPassword);
+    }
+
+        //TC:  T127002
+
+        @Test
+        public void test11 () throws Exception {
+
+            page.QA().Username().sendKeys(TestData.getQAUsername());
+            page.QA().Password().sendKeys(TestData.getQAPassword());
+            page.LoginPage().getRememberMe().click();
+            page.QA().SignIn().click();
+            //driver.close();
+            Thread.sleep(3000);
+            //driver = new ChromeDriver();
+            //driver.get("http://test.bidqa.com");
+
+
+           /* WebElement message = page.LoginPage().getwelcomeMessage();
+            String welcomeMessage = message.getText();
+            System.out.println(welcomeMessage);
+            Assert.assertEquals("Welcome s", welcomeMessage);*/
+
+
+        }
+         }
+
+
+
+
+
+
+
+
 

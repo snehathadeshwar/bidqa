@@ -2,6 +2,7 @@ package com.qauber.project;
 
 import org.junit.Before;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -26,22 +27,20 @@ public class RegsiterationPageTestCases {
         driver.get("http://test.bidqa.com");
         Thread.sleep(3000);
         page.HomePage().Registeration().click();
+        Dimension d = new Dimension(1400,900);
+        driver.manage().window().setSize(d);
 
 
     }
 
     //user cannnot enter Username more than 20 characters
     @Test
-
     public void test1() {
 
 
-        page.RegisterationPage().Username().sendKeys("abcdefghijklmnopqrstu");
-        //String message = driver.findElement(By.xpath(".//*[@id='error_username']")).getText();
-        //System.out.println(message);
+        page.RegisterationPage().getUsername().sendKeys(TestData.getLongUsername());
 
-
-        WebElement element = driver.findElement(By.xpath("//*[@id='error_username']"));
+        WebElement element = page.RegisterationPage().getUsernameError();
         String message = element.getText();
         System.out.println(message);
         Assert.assertEquals("Maximum username length is 20 characters.", message);
@@ -54,16 +53,14 @@ public class RegsiterationPageTestCases {
     public void test2() throws Exception {
 
 
-        page.RegisterationPage().Username().sendKeys("abcdefgh");
-        //String message = driver.findElement(By.xpath(".//*[@id='error_username']")).getText();
-        //System.out.println(message);
-        page.RegisterationPage().Email().sendKeys("sneha1234@gmail.com");
-        page.RegisterationPage().Password().sendKeys("1234");
-        page.RegisterationPage().RepeatPassword().sendKeys("1234");
+        page.RegisterationPage().getUsername().sendKeys(TestData.getTestUsername());
+        page.RegisterationPage().getEmail().sendKeys(TestData.getTestEmail());
+        page.RegisterationPage().getPassword().sendKeys(TestData.getTestPassword());
+        page.RegisterationPage().getRepeatPassword().sendKeys(TestData.getTestPassword());
         Thread.sleep(3000);
-        page.RegisterationPage().RegisterButton().click();
+        page.RegisterationPage().getRegisterButton().click();
 
-        WebElement element = driver.findElement(By.xpath("//*[@id='main']/div/div/div/div/div[1]/ul/li"));
+        WebElement element = page.RegisterationPage().getEmptyRobotError();
         String message = element.getText();
         System.out.println(message);
         Assert.assertEquals("ERROR: Incorrect or empty reCAPTCHA response, please try again.", message);
@@ -72,36 +69,56 @@ public class RegsiterationPageTestCases {
 
     //cannot register when passwords dont match
     @Test
-
     public void test3() throws Exception {
 
 
-        page.RegisterationPage().Username().sendKeys("abcdefgh");
-
-        //String message = driver.findElement(By.xpath(".//*[@id='error_username']")).getText();
-        //System.out.println(message);
-        page.RegisterationPage().Email().sendKeys("sneha1234@gmail.com");
+        page.RegisterationPage().getUsername().sendKeys(TestData.getTestUsername());
+        page.RegisterationPage().getEmail().sendKeys(TestData.getTestEmail());
         Thread.sleep(3000);
-        page.RegisterationPage().Password().sendKeys("123");
-        page.RegisterationPage().RepeatPassword().sendKeys("1234");
+        page.RegisterationPage().getPassword().sendKeys(TestData.getQAPassword());
+        page.RegisterationPage().getRepeatPassword().sendKeys(TestData.getPOPassword());
 
-        page.RegisterationPage().ProjectOwner().click();
+        page.RegisterationPage().getProjectOwner().click();
 
-        page.RegisterationPage().RegisterButton().click();
+        page.RegisterationPage().getRegisterButton().click();
 
-        WebElement element = driver.findElement(By.xpath(".//*[@id='main']/div/div/div/div/div[1]/ul/li[1]"));
+        WebElement element = page.RegisterationPage().getMismatchError();
         String message = element.getText();
         System.out.println(message);
         Assert.assertEquals("ERROR: please use a passwords don't match.", message);
 
     }
+        //TC: T127048
+        @Test
+        public void test4() throws Exception {
+
+        Thread.sleep(3000);
+            page.RegisterationPage().getLoginButton().click();
+
+            String actulaURL = driver.getCurrentUrl();
+
+            String expectedURL = "http://test.bidqa.com/wp-login.php";
+
+            if (actulaURL.equals(expectedURL)){
+
+                System.out.println("User is navigated to Login page");
+            }
+            else
+
+            {
+                System.out.println("User is not navigated to Login page");
+
+            }
+
+
+    }
+
 
     @AfterTest
 
     public void tearup() {
 
         driver.quit();
-
 
     }
 }

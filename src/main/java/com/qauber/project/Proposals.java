@@ -16,7 +16,7 @@ public class Proposals {
 
 
 
-    public WebElement Project() {
+    public WebElement getProject() {
 
         return driver.findElement(By.xpath("//div[@id='content']/div[@class='post']/div[@class='padd10']" +
                         "/div[@class='post-title']/a"));

@@ -6,52 +6,46 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class ProposalsTestCases {
+public class TopMenuBar {
+
 
     WebDriver driver = new ChromeDriver();
     PageResources page = new PageResources(driver);
 
-
+    //   Login in link clicked
     @BeforeTest
-    public void setup() throws Exception {
-
+    public void setup() {
         driver.get("http://test.bidqa.com");
-        Thread.sleep(3000);
+        page.HomePage().getLogIn().click();
+
         Dimension d = new Dimension(1400, 900);
         driver.manage().window().setSize(d);
-
-        page.HomePage().getLogIn().click();
         page.QA().Username().sendKeys(TestData.getQAUsername());
         page.QA().Password().sendKeys(TestData.getQAPassword());
         page.QA().SignIn().click();
-        WebElement element = page.LoginPage().getwelcomeMessage();
 
+
+        WebElement element = driver.findElement(By.xpath("//*[@id='header']/div/div/div[4]"));
         String strng = element.getText();
         System.out.println(strng);
         Assert.assertEquals("Welcome s", strng);
 
     }
 
+    //TC: T127266
     @Test
 
-    public void test1() {
+    public void test1() throws Exception {
 
-        page.MyAccount().getMyAccount().click();
-        page.Proposals().getProject().click();
-        System.out.println("Project Clicked");
+        page.MyAccount().getMyProjects().click();
+        String actualTitle = driver.getTitle();
+        String expectedTtile =  "BidQA | Projects I’ve Won";
 
-    }
+        Assert.assertTrue(actualTitle.equals(expectedTtile),"Correct page");
+        System.out.println("Expected Title is : " + expectedTtile);
 
-        @AfterTest
-         public void tearup() {
-        driver.quit();
     }
 }
-
-
-
-

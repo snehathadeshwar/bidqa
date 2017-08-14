@@ -26,11 +26,11 @@ public class SubscriptionTestCases {
         Dimension d = new Dimension(1400,900);
         driver.manage().window().setSize(d);
 
-        page.HomePage().LogIn().click();
-        page.QA().Username().sendKeys("s");
-        page.QA().Password().sendKeys("c55b38f");
+        page.HomePage().getLogIn().click();
+        page.QA().Username().sendKeys(TestData.getQAUsername());
+        page.QA().Password().sendKeys(TestData.getQAPassword());
         page.QA().SignIn().click();
-        WebElement element = page.LoginPage().welcomeMessage();
+        WebElement element = page.LoginPage().getwelcomeMessage();
 
         String strng = element.getText();
         System.out.println(strng);
@@ -47,9 +47,9 @@ public class SubscriptionTestCases {
 
             action.moveToElement(MyAccount).build().perform();
 
-            page.Subscription().accountMysubscription().click();
+            page.Subscription().getAccountMysubscription().click();
 
-            page.Subscription().subscribeButton().click();
+            page.Subscription().getSubscribeButton().click();
             Thread.sleep(5000);
 
             //Verify error message
@@ -59,7 +59,6 @@ public class SubscriptionTestCases {
             } else {
                 System.out.print("Message Absent");
             }
-
         }
 
         //
@@ -67,26 +66,23 @@ public class SubscriptionTestCases {
 
             public void test2 () throws Exception{
 
-                WebElement MyAccount = page.MyAccount().MyAccount();
+                WebElement MyAccount = page.MyAccount().getMyAccount();
 
                 Actions action = new Actions(driver);
                 action.moveToElement(MyAccount).build().perform();
                 Thread.sleep(5000);
                 action.moveToElement(MyAccount).build().perform();
+                page.Subscription().getAccountMysubscription().click();
 
-                page.Subscription().accountMysubscription().click();
+                WebElement Webtable= page.Subscription().getSubscriptionTable();
 
-                WebElement Webtable= page.Subscription().subscriptionTable();
-
-                        //driver.findElement(By.id("my_subscribtions"));
                 List<WebElement> TotalRowCount= Webtable.findElements(By.xpath("//*[@id='my_subscribtions']/tbody/tr"));
 
                 System.out.println("No. of Rows in the WebTable: "+TotalRowCount.size());
 
-                page.Subscription().deleteButton().click();
-
-
+                page.Subscription().getDeleteButton().click();
                 Thread.sleep(3000);
+
                 boolean Message = driver.getPageSource().contains("Successfully! Subscription deleted");
                 if (Message == true) {
                     System.out.print("Subscription deleted ");

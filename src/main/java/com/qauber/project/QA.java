@@ -15,9 +15,6 @@ public class QA {
         return driver.findElement(By.xpath("//*[@id='log']"));
     }
 
-    //public WebElement Email() {
-       // return driver.findElement(By.xpath("//*[@id='login_password']"));
-
 
     public WebElement Password() {
         return driver.findElement(By.xpath("//*[@id='login_password']"));

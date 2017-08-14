@@ -13,38 +13,51 @@ public class RegisterationPage {
         this.driver = driver;
     }
     // This is for Username
-    public WebElement Username() {
+    public WebElement getUsername() {
         return driver.findElement(By.xpath("//*[@id='user_login']"));
     }
 
-    public WebElement Email() {
+    public WebElement getEmail() {
         return driver.findElement(By.xpath("//*[@id='user_email']"));
     }
 
-    public WebElement Password() {
+    public WebElement getPassword() {
         return driver.findElement(By.xpath("//*[@id='pass1']"));
     }
 
-    public WebElement RepeatPassword() {
+    public WebElement getRepeatPassword() {
         return driver.findElement(By.xpath("//*[@id='pass2']"));
     }
 
-    public WebElement ProjectOwner() {
+    public WebElement getProjectOwner() {
         return driver.findElement(By.xpath("//input[@value='business_owner']"));
     }
 
-
-    public WebElement Robot() {
+    public WebElement getRobot() {
         return driver.findElement(By.xpath("//*[@id='recaptcha-anchor']"));
     }
 
-    public WebElement RegisterButton() {
-        //((JavascriptExecutor) driver).executeScript(("arguments[0].scrollIntoView();"),driver.findElement(By.xpath("//*[@id='submits']")
-        //));
+    public WebElement getRegisterButton() {
         return driver.findElement(By.xpath("//*[@id='submits']"));
     }
-
+    public WebElement getMismatchError() {
+        return driver.findElement(By.xpath(".//*[@id='main']/div/div/div/div/div[1]/ul/li[1]"));
     }
+    public WebElement getEmptyRobotError() {
+        return driver.findElement(By.xpath("//*[@id='main']/div/div/div/div/div[1]/ul/li"));
+    }
+    public WebElement getUsernameError() {
+        return driver.findElement(By.xpath("//*[@id='error_username']"));
+    }
+
+
+    public WebElement getLoginButton() {
+        ((JavascriptExecutor) driver).executeScript(("arguments[0].scrollIntoView();"), driver.findElement(By.xpath("//" +
+                "*[@id='logins']/li[2]/a")));
+        return driver.findElement(By.xpath("//*[@id='logins']/li[2]/a"));
+    }
+}
+
 
 
 

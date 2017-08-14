@@ -1,8 +1,10 @@
 package com.qauber.project;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class ActiveProjectsTestCases {
@@ -15,28 +17,27 @@ public class ActiveProjectsTestCases {
 
 
     @BeforeTest
+
     public void setup() throws Exception {
 
 
         driver.get("http://test.bidqa.com");
         Thread.sleep(3000);
-        driver.manage().window().maximize();
-        page.HomePage().LogIn().click();
-        page.QA().Username().sendKeys("st");
-        //.Username().sendKeys("st");
-        page.QA().Password().sendKeys("12");
+        Dimension d = new Dimension(1400,900);
+        driver.manage().window().setSize(d);
+        page.HomePage().getLogIn().click();
+        page.QA().Username().sendKeys(TestData.getPOUsername());
+        page.QA().Password().sendKeys(TestData.getPOPassword());
         page.QA().SignIn().click();
 
     }
 
         //Edit project link is functional
-    @Test
+         @Test
+        public void editproject() {
 
-
-    public void editproject() {
-
-        page.MyAccount().MyAccount().click();
-        page.ActiveProjects().editProject().click();
+        page.MyAccount().getMyAccount().click();
+        page.ActiveProjects().getEditProject().click();
 
         String actualTitle = driver.getTitle();
 
@@ -44,27 +45,20 @@ public class ActiveProjectsTestCases {
             System.out.println("Verification Successful - The correct Title is opened.");
         } else {
             System.out.println("Verification Failed - An Title Url is opened.");
-            //In case of Fail, you like to print the actual and expected URL for the record purpose
             System.out.println("Actual URL is : " + actualTitle);
             System.out.println("Expected URL is : " + "BidQA Edit Project -");
         }
     }
 
     //Can save an edited project
-
-
     @Test
-
-
     public void saveEditproject() {
 
 
-        page.ActiveProjects().editProject().click();
-         page.ActiveProjects().descriptionEditProject().sendKeys("Editing");
-         page.ActiveProjects().saveEditProject().click();
-         page.ActiveProjects().clickHereEditProject().click();
-
-
+        page.ActiveProjects().getEditProject().click();
+         page.ActiveProjects().getDescriptionEditProject().sendKeys("Editing");
+         page.ActiveProjects().getSaveEditProject().click();
+         page.ActiveProjects().getClickHereEditProject().click();
 
         String actualTitle = driver.getTitle();
 

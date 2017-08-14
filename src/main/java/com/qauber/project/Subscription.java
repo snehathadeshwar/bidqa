@@ -14,29 +14,29 @@ public class Subscription {
         this.driver = driver;
     }
 
-    public WebElement accountMysubscription() {
+    public WebElement getAccountMysubscription() {
         return driver.findElement(By.xpath("//*[@id='cssmenu']/ul/li[6]/ul/li[1]/a"));
 
     }
 
-    public WebElement Mysubscription() {
+    public WebElement getMysubscription() {
         return driver.findElement(By.xpath(".//*[@id='my-account-admin-menu']/li[2]/a"));
     }
 
 
-    public WebElement subscribeButton() {
+    public WebElement getSubscribeButton() {
         return driver.findElement(By.xpath("//*[@id='subscribe-form']/button"));
     }
 
-    public WebElement subscriptionTable() {
+    public WebElement getSubscriptionTable() {
         return driver.findElement(By.id("my_subscribtions"));
     }
 
-    public WebElement tableRow() {
+    public WebElement getTableRow() {
         return driver.findElement(By.xpath("//*[@id='my_subscribtions']/tbody/tr"));
     }
 
-    public WebElement deleteButton() {
+    public WebElement getDeleteButton() {
         return driver.findElement(By.xpath("//*[@id='my_subscribtions']/tbody/tr[1]/td[6]"));
     }
 
