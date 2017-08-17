@@ -19,7 +19,7 @@ public class HomePageTestCases {
     @BeforeTest
     public void testHomePage() throws Exception {
 
-        driver.get("http://test.bidqa.com");
+        driver.get(TestData.getURL());
 
         Dimension d = new Dimension(1400, 900);
         driver.manage().window().setSize(d);
@@ -36,11 +36,6 @@ public class HomePageTestCases {
 
     public void test1() throws Exception {
 
-        //Thread.sleep(3000);
-
-        // homePage.ForQAProfessionals().click();
-        // Thread.sleep(3000);
-        // System.out.println("ForQAProfessionals link clicked");
 
 
         driver.findElement(By.xpath("//*[@id='user_login']")).sendKeys(TestData.getQAUsername());
@@ -60,7 +55,7 @@ public class HomePageTestCases {
             page.HomePage().getHomebuttonLoginPage().click();
 
             String actualURL = driver.getCurrentUrl();
-            String expectedURL = "http://test.bidqa.com/";
+            String expectedURL = TestData.getURL();
 
                 if (actualURL.equals(expectedURL)){
                     System.out.println("Verification Successful - The correct Url is opened.");

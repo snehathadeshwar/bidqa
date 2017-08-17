@@ -22,7 +22,7 @@ public class SubscriptionTestCases {
     public void setup() throws Exception {
 
 
-        driver.get("http://test.bidqa.com");
+        driver.get(TestData.getURL());
         Dimension d = new Dimension(1400,900);
         driver.manage().window().setSize(d);
 
@@ -64,7 +64,7 @@ public class SubscriptionTestCases {
         //
             @Test
 
-            public void test2 () throws Exception{
+            public void test2 () throws Exception {
 
                 WebElement MyAccount = page.MyAccount().getMyAccount();
 
@@ -74,11 +74,11 @@ public class SubscriptionTestCases {
                 action.moveToElement(MyAccount).build().perform();
                 page.Subscription().getAccountMysubscription().click();
 
-                WebElement Webtable= page.Subscription().getSubscriptionTable();
+                WebElement Webtable = page.Subscription().getSubscriptionTable();
 
-                List<WebElement> TotalRowCount= Webtable.findElements(By.xpath("//*[@id='my_subscribtions']/tbody/tr"));
+                List<WebElement> TotalRowCount = Webtable.findElements(By.xpath("//*[@id='my_subscribtions']/tbody/tr"));
 
-                System.out.println("No. of Rows in the WebTable: "+TotalRowCount.size());
+                System.out.println("No. of Rows in the WebTable: " + TotalRowCount.size());
 
                 page.Subscription().getDeleteButton().click();
                 Thread.sleep(3000);
@@ -90,10 +90,15 @@ public class SubscriptionTestCases {
                     System.out.print("Subscription not deleted");
 
                 }
+            }
+                @AfterTest
+                public void test3 () throws Exception {
 
-    }
+                driver.quit();
+                }
+            }
 
-}
+
 
 
 

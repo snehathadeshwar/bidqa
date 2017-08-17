@@ -18,7 +18,7 @@ public class TopMenuBar {
     //   Login in link clicked
     @BeforeTest
     public void setup() {
-        driver.get("http://test.bidqa.com");
+        driver.get(TestData.getURL());
         page.HomePage().getLogIn().click();
 
         Dimension d = new Dimension(1400, 900);

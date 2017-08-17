@@ -22,7 +22,7 @@ public class LoginPageTestCases {
     @BeforeTest
     public void setup() {
 
-        driver.get("http://test.bidqa.com");
+        driver.get(TestData.getURL());
         page.HomePage().getLogIn().click();
 
         Dimension d = new Dimension(1400,900);
@@ -81,8 +81,8 @@ public class LoginPageTestCases {
              //Login with lost password TC:C118819
             @Test
             public void test3() {
-                page.QA().Username().sendKeys("u");
-                page.QA().Password().sendKeys("3d28c94");
+                page.QA().Username().sendKeys(TestData.getLostQAUsername());
+                page.QA().Password().sendKeys(TestData.getLostQAPassword());
                 page.QA().SignIn().click();
 
                 // /driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[8]/a")).click();
@@ -115,7 +115,7 @@ public class LoginPageTestCases {
                         Thread.sleep(3000);
                         String actualURL = driver.getCurrentUrl();
 
-                        String expectedURL = "http://test.bidqa.com";
+                        String expectedURL = TestData.getURL();
 
                         if (actualURL.equals(expectedURL)) {
 
@@ -128,15 +128,6 @@ public class LoginPageTestCases {
                         }
 
 
-                        //driver.e("window.history.go(-1)");
-                        //driver.navigate().back();
-                        //Actions kpress = new Actions(driver);
-                        //kpress.keyDown(driver.findElement(By.id("name")), Keys.ALT).perform(); kpress.sendKeys(driver.findElement(By.id("name")), "T").perform();
-                        //kpress.keyUp(driver.findElement(By.id("name")),Keys.SHIFT).perform();
-
-                        //Actions action = new Actions(driver);
-                        //action.sendKeys(Keys.COMMAND+"[");
-                        //action.sendKeys(Keys.BACK_SPACE);
                     }
 
                         //TC:T127052

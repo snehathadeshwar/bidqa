@@ -30,5 +30,25 @@ public class ActiveProjects {
     public WebElement getClickHereEditProject() { return driver.findElement(By.xpath(".//*[@id='content']" +
             "/div/div/div/div/a/strong"));
     }
+    public WebElement getPostedProjectsFilter() { return driver.findElement(By.xpath(".//*[@id='all_filter']"));
+    }
+
+    public WebElement getFirstOpenPostedProjects() { return driver.findElement(By.xpath("//div[contains" +
+            "(@class,'box_content')]/div/div/div/a"));
+    }
+    public WebElement getSubmitProposal() { return driver.findElement(By.xpath("//*[@id='submit-proposal-id']"));
+    }
+    public WebElement getbid() { return driver.findElement(By.xpath("//*[contains(@class,'bid_field')]"));
+            //".//*[@id='fancybox-content']" +
+            //"/div/div/div[2]/div/form/ul/li[1]/p"));
+    }
+    public WebElement getbidDescription() { return driver.findElement(By.xpath(".//*[@id='fancybox-content']" +
+            "/div/div/div[2]/div/form/ul/li[6]/p/textarea"));
+    }
+
+    public WebElement getCheckboxBid() { return driver.findElement(By.xpath(".//*[@id='submits_crt_check']"));
+    }
+    public WebElement getPlaceBid() { return driver.findElement(By.xpath(".//*[@id='submits_crt']"));
+    }
 
 }

@@ -21,7 +21,7 @@ public class LeftMenuBar {
     public void setup() throws Exception {
 
 
-        driver.get("http://test.bidqa.com");
+        driver.get(TestData.getURL());
         Dimension d = new Dimension(1400,900);
         driver.manage().window().setSize(d);
 
@@ -43,7 +43,7 @@ public class LeftMenuBar {
        String element = page.MyAccount().getProjectsWonNum().getText();
 
         System.out.println(element);
-
+        Thread.sleep(3000);
       page.MyAccount().getProjectsWon().click();
 
       List<WebElement> linkSize = driver.findElements(By.xpath("//div[contains(@class, 'account-main-area')]/div/div" +

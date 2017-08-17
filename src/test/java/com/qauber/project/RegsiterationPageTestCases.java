@@ -7,7 +7,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -78,8 +80,6 @@ public class RegsiterationPageTestCases {
         page.RegisterationPage().getPassword().sendKeys(TestData.getQAPassword());
         page.RegisterationPage().getRepeatPassword().sendKeys(TestData.getPOPassword());
 
-        page.RegisterationPage().getProjectOwner().click();
-
         page.RegisterationPage().getRegisterButton().click();
 
         WebElement element = page.RegisterationPage().getMismatchError();
@@ -117,7 +117,6 @@ public class RegsiterationPageTestCases {
     @AfterTest
 
     public void tearup() {
-
         driver.quit();
 
     }

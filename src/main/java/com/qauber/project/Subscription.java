@@ -40,11 +40,6 @@ public class Subscription {
         return driver.findElement(By.xpath("//*[@id='my_subscribtions']/tbody/tr[1]/td[6]"));
     }
 
-    @AfterTest
-    public void tearup () {
-
-        driver.quit();
-    }
 
     }
 

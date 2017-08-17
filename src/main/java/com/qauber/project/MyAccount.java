@@ -1,6 +1,7 @@
 package com.qauber.project;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -22,10 +23,13 @@ public class MyAccount {
     public WebElement getMyProjects() { return driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[5]/a"));
     }
 
-    public WebElement getProjectsWon() { return driver.findElement(By.xpath("//*[@id='my-account-admin-menu_buyer']/li[1]/a"));
+    public WebElement getProjectsWon() {
+
+        return driver.findElement(By.xpath("//*[@id='my-account-admin-menu_buyer']/li[1]/a"));
     }
 
     public WebElement getProjectsWonNum() { return driver.findElement(By.xpath("//*[@id='my-account-admin-menu_buyer']/li[1]/a/span"));
     }
-
+    public WebElement getPostedProjects() { return driver.findElement(By.xpath(".//*[@id='cssmenu2']/ul/li[4]/a"));
+    }
 }

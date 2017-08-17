@@ -1,14 +1,15 @@
 package com.qauber.project;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import java.util.Iterator;
+import java.util.Set;
 
 public class ProposalsTestCases {
 
@@ -19,7 +20,7 @@ public class ProposalsTestCases {
     @BeforeTest
     public void setup() throws Exception {
 
-        driver.get("http://test.bidqa.com");
+        driver.get(TestData.getURL());
         Thread.sleep(3000);
         Dimension d = new Dimension(1400, 900);
         driver.manage().window().setSize(d);
@@ -45,7 +46,29 @@ public class ProposalsTestCases {
         System.out.println("Project Clicked");
 
     }
+    @Test
+    public void SubmitProposal() {
 
+        page.MyAccount().getPostedProjects().click();
+        Select select = new Select(page.ActiveProjects().getPostedProjectsFilter());
+        select.selectByVisibleText("Ending Soon");
+        page.ActiveProjects().getFirstOpenPostedProjects().click();
+        String old = driver.getWindowHandle();
+        System.out.println(old);
+
+        page.ActiveProjects().getSubmitProposal().click();
+
+
+        String current = driver.getWindowHandle();
+        System.out.println(current);
+
+
+        page.ActiveProjects().getbid().sendKeys("10");
+        page.ActiveProjects().getbidDescription().sendKeys(TestData.getTestDescription());
+        page.ActiveProjects().getCheckboxBid().click();
+        page.ActiveProjects().getPlaceBid().click();
+
+    }
         @AfterTest
          public void tearup() {
         driver.quit();
